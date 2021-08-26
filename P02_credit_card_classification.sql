@@ -42,3 +42,5 @@ DROP COLUMN Q4_Balance;
 -- Q6 
 SELECT COUNT(*) FROM credit_card_data;
 
+drop table if exists credit_card_data;
+
