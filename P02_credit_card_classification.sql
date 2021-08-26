@@ -1,31 +1,44 @@
 -- disable safe mode in workbench
 SET SQL_SAFE_UPDATES = 0;
 
--- enable bulk inserts
-SHOW VARIABLES LIKE 'local_infile';
-SET GLOBAL local_infile = 1;
-
--- DB creation
+-- Q1 - DB creation
 CREATE DATABASE IF NOT EXISTS credit_card_classification;
 USE credit_card_classification;
 
--- table creation
+-- Q2 - table creation
 CREATE TABLE credit_card_data (
-  `A1` int(11) UNIQUE NOT NULL,
-  `A2` char(20) DEFAULT NULL,
-  `A3` varchar(20) DEFAULT NULL,
-  `A4` int(11) DEFAULT NULL,
-  `A5` int(11) DEFAULT NULL,
-  `A6` int(11) DEFAULT NULL,
-  `A7` int(11) DEFAULT NULL,
-  `A8` int(11) DEFAULT NULL,
-  `A9` int(11) DEFAULT NULL,
-  `A10` float DEFAULT NULL,
-  `A11` int(11) DEFAULT NULL,
-  `A12` float DEFAULT NULL,
-  `A13` float DEFAULT NULL,
-  `A14` int(11) DEFAULT NULL,
-  `A15` int(11) DEFAULT NULL,
-  `A16` int(11) DEFAULT NULL,
-  CONSTRAINT PRIMARY KEY (A1)  -- constraint keyword is optional but its a good practice
+  `Customer_Number` SMALLINT(6) UNIQUE NOT NULL,
+  `Offer_Accepted` VARCHAR(4) DEFAULT NULL,
+  `Reward` VARCHAR(12) DEFAULT NULL,
+  `Mailer_Type` VARCHAR(12) DEFAULT NULL,
+  `Income_Level` VARCHAR(12) DEFAULT NULL,
+  `Bank_Accounts_Open` TINYINT(2) DEFAULT NULL,
+  `Overdraft_Protection` VARCHAR(4) DEFAULT NULL,
+  `Credit_Rating` VARCHAR(12) DEFAULT NULL,
+  `Credit_Cards_Held` TINYINT(2) DEFAULT NULL,
+  `#_Homes_Owned` TINYINT(2) DEFAULT NULL,
+  `Household_Size` TINYINT(2) DEFAULT NULL,
+  `Own_Your_Home` VARCHAR(4) DEFAULT NULL,
+  `Average_Balance` FLOAT DEFAULT NULL,
+  `Q1_Balance` INT(11) DEFAULT NULL,
+  `Q2_Balance` INT(11) DEFAULT NULL,
+  `Q3_Balance` INT(11) DEFAULT NULL,
+  `Q4_Balance` INT(11) DEFAULT NULL,
+  CONSTRAINT PRIMARY KEY (Customer_Number)
 );
+
+-- Q3 - enable bulk inserts, import via import wizard
+SHOW VARIABLES LIKE 'local_infile';
+SET GLOBAL local_infile = 1;
+
+--  Q4 
+SELECT * FROM credit_card_data
+LIMIT 100;
+
+-- Q5 
+ALTER TABLE credit_card_data
+DROP COLUMN Q4_Balance;
+
+-- Q6 
+SELECT COUNT(*) FROM credit_card_data;
+
